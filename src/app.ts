@@ -1,9 +1,7 @@
-// app.ts
-
 import express from 'express';
 
-import { env } from './config';
-import router from './router';
+import { env } from '@/config';
+import router from '@/router';
 
 const app = express();
 

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import jwt from 'jsonwebtoken';
 
-import { env } from '../config';
+import { env } from '@/config';
 
 export class AuthService {
   #getPayload() {

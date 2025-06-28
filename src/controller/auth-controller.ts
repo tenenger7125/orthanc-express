@@ -1,4 +1,4 @@
-import { AuthService } from '../service/auth-service';
+import { AuthService } from '@/service/auth-service';
 
 export class AuthController {
   #authService: AuthService;
