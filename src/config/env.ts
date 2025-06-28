@@ -3,8 +3,17 @@ import Joi from 'joi';
 
 dotenv.config();
 
+interface EnvSchema {
+  NODE_ENV: 'development' | 'production' | 'test';
+  PORT: number;
+  DATABASE_URL: string;
+  API_KEY: string;
+  JWT_ACCESS_TOKEN_SECRET: string;
+  JWT_REFRESH_TOKEN_SECRET: string;
+}
+
 // Define the schema
-const envSchema = Joi.object({
+const envSchema = Joi.object<EnvSchema>({
   NODE_ENV: Joi.string().valid('development', 'production', 'test').required(),
   PORT: Joi.number().required(),
   DATABASE_URL: Joi.string().uri().required(),
