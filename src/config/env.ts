@@ -9,6 +9,8 @@ const envSchema = Joi.object({
   PORT: Joi.number().required(),
   DATABASE_URL: Joi.string().uri().required(),
   API_KEY: Joi.string().required(),
+  JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
+  JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
   // Add more variables as needed
 });
 
@@ -32,6 +34,8 @@ const config = {
   port: envVars.PORT,
   databaseUrl: envVars.DATABASE_URL,
   apiKey: envVars.API_KEY,
+  jwtAccessTokenSecret: envVars.JWT_ACCESS_TOKEN_SECRET,
+  jwtRefreshTokenSecret: envVars.JWT_REFRESH_TOKEN_SECRET,
 };
 
 export default config;
