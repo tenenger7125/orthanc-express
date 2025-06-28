@@ -1,10 +1,11 @@
 // app.ts
 
 import express from 'express';
+import { env } from './config';
 
 const app = express();
 
-app.set('port', process.env.PORT || 3000);
+app.set('port', env.port);
 
 app.get('/', (req, res) => {
   res.send('Hello World!');
