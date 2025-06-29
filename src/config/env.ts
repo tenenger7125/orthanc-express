@@ -10,6 +10,8 @@ interface EnvSchema {
   API_KEY: string;
   JWT_ACCESS_TOKEN_SECRET: string;
   JWT_REFRESH_TOKEN_SECRET: string;
+  ORTHANC_USERNAME: string;
+  ORTHANC_PASSWORD: string;
 }
 
 // Define the schema
@@ -20,6 +22,8 @@ const envSchema = Joi.object<EnvSchema>({
   API_KEY: Joi.string().required(),
   JWT_ACCESS_TOKEN_SECRET: Joi.string().required(),
   JWT_REFRESH_TOKEN_SECRET: Joi.string().required(),
+  ORTHANC_USERNAME: Joi.string().required(),
+  ORTHANC_PASSWORD: Joi.string().required(),
   // Add more variables as needed
 });
 
@@ -45,6 +49,8 @@ const config = {
   apiKey: envVars.API_KEY,
   jwtAccessTokenSecret: envVars.JWT_ACCESS_TOKEN_SECRET,
   jwtRefreshTokenSecret: envVars.JWT_REFRESH_TOKEN_SECRET,
+  orthancUsername: envVars.ORTHANC_USERNAME,
+  orthancPassword: envVars.ORTHANC_PASSWORD,
 };
 
 export default config;

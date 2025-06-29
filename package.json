@@ -13,6 +13,7 @@
     "db:seed:init": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
   "dependencies": {
+    "axios": "^1.10.0",
     "dayjs": "^1.11.13",
     "express": "^5.1.0",
     "gitmoji-cli": "^9.7.0",
