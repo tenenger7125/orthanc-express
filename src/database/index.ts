@@ -4,7 +4,7 @@ import { env } from '@/config';
 
 import config from './sequelize-config.json';
 
-export const connect = async () => {
+export const dbConnect = async () => {
   try {
     const sequelizeConfig = config[env.nodeEnv];
 

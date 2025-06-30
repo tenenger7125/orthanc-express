@@ -1,4 +1,4 @@
-import { DicomService } from '../service/dicom-service';
+import { DicomService } from '@/service/dicom-service';
 
 export class DicomController {
   #dicomService: DicomService;
@@ -10,5 +10,13 @@ export class DicomController {
   async getStudies() {
     const studies = await this.#dicomService.fetchStudies();
     return studies;
+  }
+
+  async echo() {
+    return await this.#dicomService.echo();
+  }
+
+  async find() {
+    return await this.#dicomService.find();
   }
 }

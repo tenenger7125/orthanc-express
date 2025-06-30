@@ -26,3 +26,10 @@ npx sequelize-cli db:seed:undo:all
 ```bash
 npx sequelize-cli db:seed:undo
 ```
+
+# dicom-dimse-native 설치 환경
+
+- brew install cmake
+- brew install g++
+- node 18.20.4
+- pnpm @9

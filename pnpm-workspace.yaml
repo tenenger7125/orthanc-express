@@ -1,0 +1,5 @@
+ignoredBuiltDependencies:
+  - dicom-dimse-native
+
+onlyBuiltDependencies:
+  - dicom-dimse-native

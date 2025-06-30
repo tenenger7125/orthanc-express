@@ -13,9 +13,12 @@
     "db:seed:init": "sequelize db:seed:undo:all && sequelize db:seed:all"
   },
   "dependencies": {
+    "@types/fs-extra": "^11.0.4",
     "axios": "^1.10.0",
     "dayjs": "^1.11.13",
+    "dicom-dimse-native": "^2.4.6",
     "express": "^5.1.0",
+    "fs-extra": "^11.3.0",
     "gitmoji-cli": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
     "sequelize": "^6.37.7"
