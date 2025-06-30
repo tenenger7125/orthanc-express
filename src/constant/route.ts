@@ -11,6 +11,8 @@ const dicom = {
     STUDIES: '/studies',
     ECHO: '/echo',
     FIND: '/find',
+    MOVE: '/move',
+    GET: '/get',
   },
 };
 

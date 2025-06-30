@@ -19,4 +19,12 @@ export class DicomController {
   async find() {
     return await this.#dicomService.find();
   }
+
+  async move(body: { uid: string }) {
+    return await this.#dicomService.move(body);
+  }
+
+  async get(body: { uid: string }) {
+    return await this.#dicomService.get(body);
+  }
 }

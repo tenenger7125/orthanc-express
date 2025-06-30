@@ -4,6 +4,9 @@ import { env } from '@/config';
 import { dicomEcho } from '@/util/dicom-echo';
 import { dicomFind } from '@/util/dicom-find';
 
+import { dicomGet } from '../util/dicom-get';
+import { dicomMove } from '../util/dicom-move';
+
 export class DicomService {
   async echo() {
     return await dicomEcho();
@@ -11,6 +14,14 @@ export class DicomService {
 
   async find() {
     return await dicomFind();
+  }
+
+  async move(body: { uid: string }) {
+    return await dicomMove(body);
+  }
+
+  async get(body: { uid: string }) {
+    return await dicomGet(body);
   }
 
   async fetchStudies() {

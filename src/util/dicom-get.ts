@@ -1,12 +1,13 @@
-import { findScu, findScuOptions } from 'dicom-dimse-native';
+import { getScu, getScuOptions } from 'dicom-dimse-native';
 
 import { env } from '@/config';
-import { DICOM_STATUS_CODE, DICOM_TAG_KEY, DICOM_TAG_VALUE } from '@/constant/dicom';
-import { DicomResponse } from '@/types/dicom';
 
+import { DICOM_STATUS_CODE, DICOM_TAG_KEY, DICOM_TAG_VALUE } from '../constant/dicom';
+import { PATH } from '../constant/path';
 import { dicomResponseParse } from './dicom-parse';
+import { generateTag } from './dicom-tag';
 
-const options: findScuOptions = {
+const defaultOptions: getScuOptions = {
   source: {
     aet: env.dicomSourceAet,
     ip: env.dicomSourceIp,
@@ -18,22 +19,21 @@ const options: findScuOptions = {
     port: env.dicomTargetPort,
   },
   tags: [
-    { key: DICOM_TAG_KEY.UID, value: '' },
-    {
-      key: DICOM_TAG_KEY.PATIENT_NAME,
-      value: '',
-    },
     {
       key: DICOM_TAG_KEY.QUERY_LEVEL,
       value: DICOM_TAG_VALUE.QUERY_LEVEL_STUDY,
     },
   ],
+  storagePath: PATH.DICOM_DATA,
   verbose: true,
 };
 
-export const dicomFind = () => {
-  return new Promise<DicomResponse>((resolve, reject) => {
-    findScu(options, result => {
+export const dicomGet = ({ uid }: { uid: string }) => {
+  return new Promise((resolve, reject) => {
+    const uidTag = generateTag(DICOM_TAG_KEY.UID, uid);
+    const options = { ...defaultOptions, tags: [...defaultOptions.tags, uidTag] };
+
+    getScu(options, result => {
       const data = dicomResponseParse(result);
 
       if (data.code === DICOM_STATUS_CODE.SUCCESS) resolve(data);

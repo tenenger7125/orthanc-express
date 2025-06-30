@@ -14,8 +14,7 @@ const options: echoScuOptions = {
   },
   target: {
     aet: env.dicomTargetAet,
-    ip: env.dicomTargetIp, // success
-    // ip: 'host.docker.internal', // error
+    ip: env.dicomTargetIp,
     port: env.dicomTargetPort,
   },
   verbose: true,
@@ -25,11 +24,9 @@ export const dicomEcho = () => {
   return new Promise<DicomResponse>((resolve, reject) => {
     echoScu(options, result => {
       const data = dicomResponseParse(result);
-      if (data.code === DICOM_STATUS_CODE.SUCCESS) {
-        resolve(data);
-      } else if (data.code === DICOM_STATUS_CODE.FAILURE) {
-        reject(data);
-      }
+
+      if (data.code === DICOM_STATUS_CODE.SUCCESS) resolve(data);
+      else if (data.code === DICOM_STATUS_CODE.FAILURE) reject(data.message);
     });
   });
 };

@@ -10,10 +10,8 @@ export enum DICOM_TAG_KEY {
   QUERY_LEVEL = '00080052',
 }
 
-export const DICOM_TAG_VALUE = {
-  QUERY_LEVEL: {
-    STUDY: 'STUDY',
-    SERIES: 'SERIES',
-    IMAGE: 'IMAGE',
-  },
-};
+export enum DICOM_TAG_VALUE {
+  QUERY_LEVEL_STUDY = 'STUDY',
+  QUERY_LEVEL_SERIES = 'SERIES',
+  QUERY_LEVEL_IMAGE = 'IMAGE',
+}
