@@ -7,8 +7,8 @@ export class DicomController {
     this.#dicomService = new DicomService();
   }
 
-  async getStudies() {
-    const studies = await this.#dicomService.fetchStudies();
+  async getStudy(body: { uid: string }) {
+    const studies = await this.#dicomService.fetchStudy(body);
     return studies;
   }
 

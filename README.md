@@ -33,3 +33,18 @@ npx sequelize-cli db:seed:undo
 - brew install g++
 - node 18.20.4
 - pnpm @9
+
+# startStoreScp callback
+
+- 실행되지 않는다.
+
+# vr type invalid
+
+- Dicom VR 타입이 정의되지 않을 경우 발생하는 Warning.
+- dcmjs에서 자동 fallback 처리 해줌
+
+```bash
+Invalid vr type xs - using US
+Invalid vr type xs - using US
+Invalid vr type ox - using OW
+```

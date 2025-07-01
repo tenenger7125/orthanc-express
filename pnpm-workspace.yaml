@@ -2,4 +2,6 @@ ignoredBuiltDependencies:
   - dicom-dimse-native
 
 onlyBuiltDependencies:
+  - core-js-pure
   - dicom-dimse-native
+  - sharp

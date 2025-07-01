@@ -7,6 +7,7 @@
   "type": "commonjs",
   "main": "src/app.ts",
   "scripts": {
+    "preinstall": "[ -f dcmjs.d.ts ] ||npx dts-gen -m dcmjs",
     "start": "ts-node-dev --respawn --transpile-only -r tsconfig-paths/register src/app.ts",
     "dev": "pnpm db:migrate && pnpm db:seed:init && pnpm start",
     "db:migrate": "sequelize db:migrate",
@@ -16,12 +17,16 @@
     "@types/fs-extra": "^11.0.4",
     "axios": "^1.10.0",
     "dayjs": "^1.11.13",
+    "dcmjs": "^0.42.0",
+    "dcmjs-dimse": "^0.2.7",
+    "dcmjs-imaging": "^0.2.1",
     "dicom-dimse-native": "^2.4.6",
     "express": "^5.1.0",
     "fs-extra": "^11.3.0",
     "gitmoji-cli": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
-    "sequelize": "^6.37.7"
+    "sequelize": "^6.37.7",
+    "sharp": "^0.34.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.30.0",
@@ -29,6 +34,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^24.0.4",
     "dotenv": "^17.0.0",
+    "dts-gen": "^0.10.4",
     "eslint": "^9.30.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "globals": "^16.2.0",

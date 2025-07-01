@@ -18,4 +18,5 @@ export default defineConfig([
       'simple-import-sort/exports': 'error',
     },
   },
+  { ignores: ['dcmjs.d.ts'] },
 ]);

@@ -1,7 +1,11 @@
 import { moveScu, moveScuOptions } from 'dicom-dimse-native';
+import fs from 'fs-extra';
+import path from 'path';
 
 import { env } from '@/config';
 import { DICOM_STATUS_CODE, DICOM_TAG_KEY, DICOM_TAG_VALUE } from '@/constant/dicom';
+import { EXTENSION } from '@/constant/extension';
+import { PATH } from '@/constant/path';
 
 import { dicomResponseParse } from './dicom-parse';
 import { generateTag } from './dicom-tag';
@@ -32,11 +36,27 @@ export const dicomMove = ({ uid }: { uid: string }) => {
   const options = { ...defaultOptions, tags: [...defaultOptions.tags, uidTag] };
 
   return new Promise((resolve, reject) => {
-    moveScu(options, result => {
+    moveScu(options, async result => {
       const data = dicomResponseParse(result);
 
-      if (data.code === DICOM_STATUS_CODE.SUCCESS) resolve(data);
-      else if (data.code === DICOM_STATUS_CODE.FAILURE) reject(data.message);
+      if (data.code === DICOM_STATUS_CODE.SUCCESS) {
+        await convertDicomFiles(uid);
+        resolve(data);
+      } else if (data.code === DICOM_STATUS_CODE.FAILURE) reject(data.message);
     });
   });
+};
+
+const convertDicomFiles = async (uid: string) => {
+  const folderPath = path.join(PATH.DICOM_DATA, uid);
+  const fileNames = fs.readdirSync(folderPath).filter(fileName => !fileName.endsWith(EXTENSION.DICOM));
+
+  return Promise.all(fileNames.map(fileName => convertDicomFile(folderPath, fileName)));
+};
+
+const convertDicomFile = async (folderPath: string, fileName: string) => {
+  const oldFilePath = path.join(folderPath, fileName);
+  const newFilePath = `${oldFilePath}${EXTENSION.DICOM}`;
+  await fs.rename(oldFilePath, newFilePath);
+  return newFilePath;
 };

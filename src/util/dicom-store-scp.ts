@@ -27,23 +27,7 @@ export const dicomStoreScpConnect = async () => {
   await generateFolder(scpOptions.storagePath);
 
   startStoreScp(scpOptions, result => {
-    const msg = JSON.parse(result);
-
-    // retrieve and store the image
-    if (msg.message === 'BUFFER_STORAGE') {
-      const buff = Buffer.from(msg.container.base64, 'base64');
-      const directory = `${scpOptions.storagePath}/${msg.container.StudyInstanceUID}`;
-      const filepath = `${directory}/${msg.container.SOPInstanceUID}.dcm`;
-      if (!fs.existsSync(directory)) {
-        fs.mkdirSync(directory);
-      }
-      fs.writeFile(filepath, buff, 'binary', err => {
-        if (err) console.log(err);
-        else console.log(`The file was saved to ${filepath}`);
-      });
-    } else {
-      console.log(msg);
-    }
+    console.log(JSON.parse(result));
   });
 };
 

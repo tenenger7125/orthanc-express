@@ -1,11 +1,12 @@
-import axios from 'axios';
+import fs from 'fs';
+import path from 'path';
 
-import { env } from '@/config';
+import { PATH } from '@/constant/path';
 import { dicomEcho } from '@/util/dicom-echo';
 import { dicomFind } from '@/util/dicom-find';
-
-import { dicomGet } from '../util/dicom-get';
-import { dicomMove } from '../util/dicom-move';
+import { dicomGet } from '@/util/dicom-get';
+import { dicomMove } from '@/util/dicom-move';
+import { readDicom } from '@/util/dicom-read';
 
 export class DicomService {
   async echo() {
@@ -24,15 +25,13 @@ export class DicomService {
     return await dicomGet(body);
   }
 
-  async fetchStudies() {
-    const raw = `${env.orthancUsername}:${env.orthancPassword}`;
-    const basicToken = Buffer.from(raw).toString('base64');
+  async fetchStudy({ uid }: { uid: string }) {
+    const dicomPath = path.join(PATH.DICOM_DATA, uid);
+    const fileNames = fs.readdirSync(dicomPath).filter(fileName => fileName.endsWith('.dcm'));
 
-    const { data } = await axios.get('http://localhost:8042/studies', {
-      headers: {
-        Authorization: `Basic ${basicToken}`,
-      },
-    });
+    const data = await Promise.all(
+      fileNames.map(fileName => new Promise(resolve => resolve(readDicom(dicomPath, fileName))))
+    );
 
     return data;
   }

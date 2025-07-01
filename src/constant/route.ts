@@ -9,6 +9,7 @@ const dicom = {
   DICOM: {
     ROOT: '/dicom',
     STUDIES: '/studies',
+    STUDY: '/study',
     ECHO: '/echo',
     FIND: '/find',
     MOVE: '/move',
