@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 
 import { PATH } from '@/constant/path';
+import { convertDicomFiles } from '@/util/dicom-convert';
 import { dicomEcho } from '@/util/dicom-echo';
 import { dicomFind } from '@/util/dicom-find';
 import { dicomGet } from '@/util/dicom-get';
@@ -18,7 +19,9 @@ export class DicomService {
   }
 
   async move(body: { uid: string }) {
-    return await dicomMove(body);
+    const data = await dicomMove(body);
+    await convertDicomFiles(body);
+    return data;
   }
 
   async get(body: { uid: string }) {
