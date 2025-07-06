@@ -49,9 +49,18 @@ export const dicomMove = ({ uid }: { uid: string }) => {
 
 const convertDicomFiles = async (uid: string) => {
   const folderPath = path.join(PATH.DICOM_DATA, uid);
-  const fileNames = fs.readdirSync(folderPath).filter(fileName => !fileName.endsWith(EXTENSION.DICOM));
+  const fileNames = fs.readdirSync(folderPath).filter(fileName => fileName.startsWith(uid));
+  const newFolderPath = path.join(folderPath, 'dicom');
 
-  return Promise.all(fileNames.map(fileName => convertDicomFile(folderPath, fileName)));
+  await Promise.all(fileNames.map(fileName => moveFile(folderPath, newFolderPath, fileName)));
+  return Promise.all(fileNames.map(fileName => convertDicomFile(newFolderPath, fileName)));
+};
+
+const moveFile = async (oldFolderPath: string, newFolderPath: string, fileName: string) => {
+  const oldfilePath = path.join(oldFolderPath, fileName);
+  const newFilePath = path.join(newFolderPath, fileName);
+
+  await fs.move(oldfilePath, newFilePath, { overwrite: true });
 };
 
 const convertDicomFile = async (folderPath: string, fileName: string) => {
