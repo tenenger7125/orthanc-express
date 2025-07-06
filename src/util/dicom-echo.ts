@@ -4,7 +4,7 @@ import { env } from '@/config';
 import { DicomResponse } from '@/types/dicom';
 
 import { DICOM_STATUS_CODE } from '../constant/dicom';
-import { dicomResponseParse } from './dicom-parse';
+import { dicomResponseParse } from './dicom-response-parse';
 
 const options: echoScuOptions = {
   source: {

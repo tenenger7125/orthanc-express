@@ -3,6 +3,7 @@ node_modules
 .env.development
 .env.production
 dicom.log
+dicom.log.1
 /data
 .DS_Store
 dcmjs.d.ts

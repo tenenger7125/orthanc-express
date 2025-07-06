@@ -4,7 +4,7 @@ import { env } from '@/config';
 
 import { DICOM_STATUS_CODE, DICOM_TAG_KEY, DICOM_TAG_VALUE } from '../constant/dicom';
 import { PATH } from '../constant/path';
-import { dicomResponseParse } from './dicom-parse';
+import { dicomResponseParse } from './dicom-response-parse';
 import { generateTag } from './dicom-tag';
 
 const defaultOptions: getScuOptions = {

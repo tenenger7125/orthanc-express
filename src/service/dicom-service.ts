@@ -2,12 +2,12 @@ import fs from 'fs';
 import path from 'path';
 
 import { PATH } from '@/constant/path';
-import { convertDicomFiles } from '@/util/dicom-convert';
 import { dicomEcho } from '@/util/dicom-echo';
 import { dicomFind } from '@/util/dicom-find';
 import { dicomGet } from '@/util/dicom-get';
 import { dicomMove } from '@/util/dicom-move';
-import { readDicom } from '@/util/dicom-read';
+import { parseDicomFiles } from '@/util/dicom-parse/dicom-parse';
+import { readDicom } from '@/util/dicom-parse/dicom-read';
 
 export class DicomService {
   async echo() {
@@ -20,7 +20,9 @@ export class DicomService {
 
   async move(body: { uid: string }) {
     const data = await dicomMove(body);
-    await convertDicomFiles(body);
+
+    await parseDicomFiles(body);
+
     return data;
   }
 

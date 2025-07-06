@@ -3,7 +3,7 @@ import { moveScu, moveScuOptions } from 'dicom-dimse-native';
 import { env } from '@/config';
 import { DICOM_STATUS_CODE, DICOM_TAG_KEY, DICOM_TAG_VALUE } from '@/constant/dicom';
 
-import { dicomResponseParse } from './dicom-parse';
+import { dicomResponseParse } from './dicom-response-parse';
 import { generateTag } from './dicom-tag';
 
 const defaultOptions: moveScuOptions = {
@@ -35,9 +35,8 @@ export const dicomMove = ({ uid }: { uid: string }) => {
     moveScu(options, async result => {
       const data = dicomResponseParse(result);
 
-      if (data.code === DICOM_STATUS_CODE.SUCCESS) {
-        resolve(data);
-      } else if (data.code === DICOM_STATUS_CODE.FAILURE) reject(data.message);
+      if (data.code === DICOM_STATUS_CODE.SUCCESS) resolve(data);
+      else if (data.code === DICOM_STATUS_CODE.FAILURE) reject(data.message);
     });
   });
 };
