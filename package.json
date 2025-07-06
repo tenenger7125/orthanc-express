@@ -8,10 +8,12 @@
   "main": "src/app.ts",
   "scripts": {
     "preinstall": "[ -f dcmjs.d.ts ] ||npx dts-gen -m dcmjs",
+    "prestart": "pnpm db:migrate && pnpm db:model:auto-generate",
     "start": "ts-node-dev --ignore-watch . --respawn --transpile-only -r tsconfig-paths/register src/app.ts",
-    "dev": "pnpm db:migrate && pnpm db:seed:init && pnpm start",
+    "dev": "pnpm db:seed:init && pnpm start",
     "db:migrate": "sequelize db:migrate",
-    "db:seed:init": "sequelize db:seed:undo:all && sequelize db:seed:all"
+    "db:seed:init": "sequelize db:seed:undo:all && sequelize db:seed:all",
+    "db:model:auto-generate": "ts-node-dev -r tsconfig-paths/register src/database/orm.ts"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -25,7 +27,9 @@
     "fs-extra": "^11.3.0",
     "gitmoji-cli": "^9.7.0",
     "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.1",
     "sequelize": "^6.37.7",
+    "sequelize-auto": "^0.8.8",
     "sharp": "^0.34.2"
   },
   "devDependencies": {

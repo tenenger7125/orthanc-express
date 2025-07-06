@@ -7,11 +7,6 @@ export class DicomController {
     this.#dicomService = new DicomService();
   }
 
-  async getStudy(body: { uid: string }) {
-    const studies = await this.#dicomService.fetchStudy(body);
-    return studies;
-  }
-
   async echo() {
     return await this.#dicomService.echo();
   }

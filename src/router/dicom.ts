@@ -5,12 +5,6 @@ import { DicomController } from '@/controller/dicom-controller';
 
 const router = Router();
 
-router.get(ROUTE.DICOM.STUDY, async (req, res) => {
-  const dicomController = new DicomController();
-  const study = await dicomController.getStudy(req.body);
-  res.send(study);
-});
-
 router.get(ROUTE.DICOM.ECHO, async (req, res) => {
   const dicomController = new DicomController();
   const data = await dicomController.echo();

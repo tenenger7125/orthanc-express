@@ -48,3 +48,26 @@ Invalid vr type xs - using US
 Invalid vr type xs - using US
 Invalid vr type ox - using OW
 ```
+
+# dcmjs d.ts 파일 생성
+
+- dcmjs에서 d.ts 파일을 제공해주지 않아 type 추론이 어렵다.
+- 아쉬운 상황이지만 dts-gen 으로 any 타입 추론하는 것으로 대체한다.
+- d.ts 파일이 존재하지 않으면, install 전단계에 생성한다.
+
+```json
+{
+  "script": {
+    "preinstall": "[ -f dcmjs.d.ts ] ||npx dts-gen -m dcmjs"
+  }
+}
+```
+
+# dicom 파일 생성, 이미지 생성시 폴더 분리
+
+- data/[uid]/dicom, data/[uid]/image 폴더를 생성해서 해당 경로에 파일 추가하기
+
+# dicom tag db 저장
+
+- dicom tag 별 기본 정보 저장: tag table
+- mysql에 study의 dicom tag별 정보 저장: study table, patient table...

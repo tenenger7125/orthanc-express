@@ -7,3 +7,5 @@ dicom.log.1
 /data
 .DS_Store
 dcmjs.d.ts
+
+src/database/models

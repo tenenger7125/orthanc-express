@@ -2,39 +2,13 @@ import { data } from 'dcmjs';
 import fs from 'fs';
 import path from 'path';
 
+import { VR } from '@/constant/dicom-message';
+
 import { getFileInfo } from './dicom-info';
 
 type DicomObject = {
   [key in string]: {
-    vr:
-      | 'AE'
-      | 'AS'
-      | 'AT'
-      | 'CS'
-      | 'DA'
-      | 'DS'
-      | 'DT'
-      | 'FL'
-      | 'FD'
-      | 'IS'
-      | 'LO'
-      | 'LT'
-      | 'OB'
-      | 'OD'
-      | 'OF'
-      | 'OW'
-      | 'PN'
-      | 'SH'
-      | 'SL'
-      | 'SQ'
-      | 'SS'
-      | 'ST'
-      | 'TM'
-      | 'UI'
-      | 'UL'
-      | 'UN'
-      | 'US'
-      | 'UT';
+    vr: (typeof VR)[number];
     Value: [string | number | object];
     _rawValue?: [string | number | object];
   };
